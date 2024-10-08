@@ -8,6 +8,6 @@ namespace Project2BurgerMenu.Entities
     public class Category
     {
         public int CategoryId { get; set; }
-        public int CategoryName { get; set; }
+        public string CategoryName { get; set; }
     }
 }
