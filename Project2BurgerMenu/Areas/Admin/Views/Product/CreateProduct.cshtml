@@ -1,0 +1,34 @@
+﻿@model Project2BurgerMenu.Entities.Product
+
+@{
+    ViewBag.Title = "CreateProduct";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+         <div class="card-body">
+             <h4 class="card-title">yeni ürün girişi</h4>
+       
+
+            <form method="post">
+                <label>ürün adı</label>
+                @Html.TextBoxFor(x => x.ProductName, new { @class = "form-control" })
+
+                <label>ürün fiyatı</label>
+                @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+
+                <label>ürün görsel</label>
+                @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
+
+                <label>ürün kategori</label>
+                @Html.DropDownListFor(x => x.CategoryId,(List<SelectListItem>)ViewBag.v,new {@class="form-control"})
+
+                <label>ürün açıklaması</label>
+                @Html.TextAreaFor(x => x.Description,4,0, new { @class = "form-control" })
+
+                <button class="btn btn-info">ürün ekle</button>
+            </form>
+         </div>
+    </div>
+</div>
+
