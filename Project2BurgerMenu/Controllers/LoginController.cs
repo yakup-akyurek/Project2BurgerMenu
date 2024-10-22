@@ -9,7 +9,7 @@ using System.Web.Security;
 
 namespace Project2BurgerMenu.Controllers
 {
-    //admin girişi
+    //admin girişi - web config incele
     public class LoginController : Controller
     {
         BurgerMenuContext context = new BurgerMenuContext();        
@@ -26,7 +26,7 @@ namespace Project2BurgerMenu.Controllers
             {
                 FormsAuthentication.SetAuthCookie(values.Username,false);
                 Session["x"]=values.Username.ToString();
-                return RedirectToAction("ProdcutList","Product","Admin");
+                return RedirectToAction("ProdcutList","Product",new {area= "Admin"});
 
             }
             else 
