@@ -35,17 +35,19 @@ namespace Project2BurgerMenu.Controllers
         }
         public PartialViewResult PartialMenu()
         {
+            var values=context.Products.ToList();
 
-            return PartialView();
+            return PartialView(values);
         }
         public PartialViewResult PartialCategory() 
         {
-            var values = context.Categories.ToList();
+            var values = context.Categories.Take(6).ToList();
             return PartialView(values);
         }
         public PartialViewResult PartialGallery()
         {
-            return PartialView();
+            var products = context.Products.Take(6).ToList();
+            return PartialView(products);
         }
         public PartialViewResult PartialFooter()
         {
@@ -54,6 +56,39 @@ namespace Project2BurgerMenu.Controllers
         public PartialViewResult PartialScripts()
         {
             return PartialView();
+        }
+        [HttpGet]
+        public PartialViewResult PartialReservation()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public PartialViewResult PartialReservation(Reservation reservation)
+        {
+            reservation.ReservationStatus = "Onay bekleniyor";
+            context.Reservations.Add(reservation);
+            context.SaveChanges();
+            return PartialView();
+        }
+        public PartialViewResult PartialLocation()
+        {
+            ViewBag.mapLocation = context.Abouts.Select(x => x.MapLocation).FirstOrDefault();
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult Index(Contact contact)
+        {
+            contact.SendDate = DateTime.Now;
+            contact.IsRead = false;
+            context.Contacts.Add(contact);
+            context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public PartialViewResult PartialContact()
+        {
+            var values = context.Abouts.ToList();
+            return PartialView(values);
         }
     }
 }
